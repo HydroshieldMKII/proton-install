@@ -37,6 +37,18 @@ Use the printed name as `PROTON_VERSION`. To get another version, install [Valve
 from your Steam library with the type filter set to Tools, or unpack a third-party build like
 [GE-Proton](https://github.com/GloriousEggroll/proton-ge-custom/releases) into `compatibilitytools.d/`.
 
+## Configuration
+
+Edit the variables at the top of the script:
+
+| Variable | Default | Notes |
+| --- | --- | --- |
+| `STEAM_ROOT` | `$HOME/.local/share/Steam` | Steam's data directory. Flatpak Steam uses `~/.var/app/com.valvesoftware.Steam/.local/share/Steam`. |
+| `PROTON_VERSION` | `Proton 11.0` | A runner name from the command above. Must match the directory name exactly, spaces included. |
+| `GAMES_DIR` | `$HOME/Games` | Where installed games land. Must be inside `$HOME`. |
+| `WINE_DPI` | `96` | Installer window scaling. Common values are listed in the script. |
+| `CACHE_DIR` | `$HOME/.cache/proton-installers` | Holds the throwaway prefixes. Cleared when the script exits, or by `--killall` if anything survives. |
+
 ## Usage
 
 ```sh
@@ -50,15 +62,3 @@ The script prints an install path and waits for confirmation:
 Game name:    MyGame
 Install into: Z:\Games\MyGame   <- Choose this path in your installer
 ```
-
-## Configuration
-
-Edit the variables at the top of the script:
-
-| Variable | Default | Notes |
-| --- | --- | --- |
-| `STEAM_ROOT` | `$HOME/.local/share/Steam` | Steam's data directory. Flatpak Steam uses `~/.var/app/com.valvesoftware.Steam/.local/share/Steam`. |
-| `PROTON_VERSION` | `Proton 11.0` | A runner name from the command above. Must match the directory name exactly, spaces included. |
-| `GAMES_DIR` | `$HOME/Games` | Where installed games land. Must be inside `$HOME`. |
-| `WINE_DPI` | `96` | Installer window scaling. Common values are listed in the script. |
-| `CACHE_DIR` | `$HOME/.cache/proton-installers` | Holds the throwaway prefixes. Cleared when the script exits, or by `--killall` if anything survives. |
