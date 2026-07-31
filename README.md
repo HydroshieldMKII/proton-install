@@ -7,6 +7,15 @@ Run a Windows game installer in a throwaway Steam Proton prefix. Useful for DRM-
 - Steam, with at least one Proton runner installed
 - `bash`
 
+## Install
+
+```sh
+curl -O https://raw.githubusercontent.com/HydroshieldMKII/proton-install/main/install-game.sh
+chmod +x install-game.sh
+```
+
+Edit the variables at the top before the first run, see [Configuration](#configuration).
+
 ## Find available Proton versions
 
 Run this to list the Proton runners already installed:
@@ -24,7 +33,9 @@ Proton 11.0
 Proton - Experimental
 ```
 
-Use the printed name as `PROTON_VERSION`.
+Use the printed name as `PROTON_VERSION`. To get another version, install [Valve's Proton](https://github.com/ValveSoftware/Proton)
+from your Steam library with the type filter set to Tools, or unpack a third-party build like
+[GE-Proton](https://github.com/GloriousEggroll/proton-ge-custom/releases) into `compatibilitytools.d/`.
 
 ## Usage
 
