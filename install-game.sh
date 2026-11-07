@@ -38,8 +38,8 @@ if [[ "${1:-}" == "--killall" ]]; then
         pid="${proc#/proc/}"
         # get the env block, convert nulls to newlines, and check for 
         # the STEAM_COMPAT_DATA_PATH env var. If it matches kill
-        tr '\0' '\n' < "$proc/environ" | grep -q "^STEAM_COMPAT_DATA_PATH=$CACHE_DIR/" \
-            && kill -9 "$pid" 2>/dev/null
+        tr '\0' '\n' < "$proc/environ" | grep -q "^STEAM_COMPAT_DATA_PATH=$CACHE_DIR/" &&
+            kill -9 "$pid" 2>/dev/null
     done 2>/dev/null
     rm -rf "$CACHE_DIR"/pfx.*
     echo "Killed all installer processes, cleaned up $CACHE_DIR"
@@ -59,15 +59,16 @@ read -rp "Proceed? [Y/n] " ok
 [[ "${ok:-y}" =~ ^[Nn] ]] && exit 0
 
 # Created up front: some installers reject a destination that does not exist.
-mkdir -p "$GAMES_DIR/$GAME_NAME" "$CACHE_DIR"
+#mkdir -p "$GAMES_DIR/$GAME_NAME" "$CACHE_DIR"
 
 STEAM_COMPAT_DATA_PATH="$(mktemp -d "$CACHE_DIR/pfx.XXXXXX")"
 STEAM_COMPAT_CLIENT_INSTALL_PATH="$STEAM_ROOT"
 export STEAM_COMPAT_DATA_PATH STEAM_COMPAT_CLIENT_INSTALL_PATH
 PFX="$STEAM_COMPAT_DATA_PATH/pfx"
+
 trap 'WINEPREFIX="$PFX" "$WINESERVER" -k 2>/dev/null; rm -rf "$STEAM_COMPAT_DATA_PATH"' EXIT
 
-"$PROTON" run wineboot >/dev/null 2>&1 || true
+"$PROTON" run wineboot.exe -w >/dev/null 2>&1 || true
 
 if [ "$WINE_DPI" -ne 96 ]; then
     "$PROTON" run reg add "HKCU\\Control Panel\\Desktop" \
